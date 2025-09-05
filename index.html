@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屯溪一中软件社英灵殿</title>
+    <style>
+        /* --- 全局样式 --- */
+        :root {
+            --primary-color: #64FFDA; /* 科技青色 */
+            --bg-color: #0A192F;      /* 深空蓝色 */
+            --text-color: #CCD6F6;    /* 浅色文字 */
+            --dark-text-color: #8892B0; /* 深色文字/副标题 */
+            --card-bg: rgba(20, 39, 78, 0.5); /* 卡片背景 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2 {
+            color: #E6F1FF;
+            font-weight: 600;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* --- 导航栏 --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .navbar .logo span {
+            color: #fff;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 30px;
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            color: var(--primary-color);
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* --- 英雄/主视觉区 --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            padding: 0 8%;
+            /* 关键修改：背景图路径已更新 */
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 1)), url('images/background.jpg') no-repeat center center/cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--dark-text-color);
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* --- 英灵殿成员 --- */
+        .member-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .member-card {
+            background: var(--card-bg);
+            border: 1px solid #1d3b66;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            width: 300px;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+            border-color: var(--primary-color);
+        }
+
+        .member-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .member-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #E6F1FF;
+        }
+
+        .member-card p {
+            font-size: 1rem;
+            color: var(--dark-text-color);
+            font-style: italic;
+        }
+        
+        /* --- 简介区域 --- */
+        .intro-section .content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .intro-section .text {
+            flex: 1;
+        }
+        
+        .intro-section .text p {
+             margin-bottom: 15px;
+        }
+        
+        .intro-section .image {
+            flex: 1;
+            max-width: 450px;
+        }
+        
+        .intro-section .image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        /* --- 页脚 --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #1d3b66;
+            color: var(--dark-text-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#hero-section" class="logo"><span>T</span>HSS<span>.HoF</span></a>
+        <nav>
+            <ul>
+                <li><a href="#hero-section">首页</a></li>
+                <li><a href="#members-section">英灵殿</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="hero">
+            <h1>一行代码，<span>点亮星辰</span></h1>
+            <p>屯溪一中软件社英灵殿 - 铭记荣光，传承梦想</p>
+            <a href="#members-section" class="btn">瞻仰群星</a>
+        </section>
+
+        <section id="members-section" class="container">
+            <h2>英灵殿成员</h2>
+            <div class="member-grid">
+                <div class="member-card">
+                    <img src="images/bushimaomao.jpg" alt="布施毫猫头像">
+                    <h3>布施毫猫</h3>
+                    <p>事迹：暂空</p>
+                </div>
+                <div class="member-card">
+                    <img src="images/wh.jpg" alt="wh头像">
+                    <h3>wh</h3>
+                    <p>事迹：暂空</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="intro" class="intro-section container">
+             <h2>何为“英灵殿”？</h2>
+             <div class="content">
+                 <div class="text">
+                     <p>这里，是屯溪一中软件社的荣誉圣殿，是每一位以智慧与汗水在代码世界里摘星揽月的开拓者的精神丰碑。我们建立“英灵殿”，是为了铭记那些用键盘敲击出荣耀，用算法点亮了社团历史的杰出学长学姐。</p>
+                     <p>对于每一位现任社员而言，“英灵殿”是仰望的目标，是追赶的动力，更是我们血脉中传承不息的创新与拼搏精神的具象化。它时刻提醒着我们：平凡的起点，亦可抵达伟大的终章。</p>
+                     <p>愿我们都能在此汲取力量，续写传奇，让屯中软件社的星空，因你我而更加璀璨。</p>
+                 </div>
+                 <div class="image">
+                     <!-- 关键修改：插图路径已更新 -->
+                     <img src="images/background.jpg" alt="背景图片">
+                 </div>
+             </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 屯溪一中软件社. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
